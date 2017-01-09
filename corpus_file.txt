@@ -1,0 +1,20 @@
+open the window
+close the window
+turn on the light
+turn off the light
+turn on the living room light
+turn on the light in the living room
+turn off the living room light
+turn off the light in the living room
+turn up the light
+turn down the light
+turn up the living room light
+turn down the living room light
+switch on the light
+switch off the light
+switch on the living room light
+switch off the living room light
+lock the door
+unlock the door
+turn up the heater
+turn down the heater
