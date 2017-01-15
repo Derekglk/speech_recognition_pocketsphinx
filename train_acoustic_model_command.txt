@@ -1,0 +1,1000 @@
+  484  sudo vim ov534.h 
+  485  cd /lib/modules/4.4.0-51-generic/kernel/drivers/media/usb/gspca/
+  486  ls
+  487  mv gspca_ov534.ko gspca_ov534_backup.ko 
+  488  sudo mv gspca_ov534.ko gspca_ov534_backup.ko 
+  489  sudo mv gspca_ov534_9.ko gspca_ov534_9_backup.ko
+  490  ll
+  491  ls
+  492  cp gspca_ov534_9_backup.ko gspca_ov534.ko
+  493  sudo cp gspca_ov534_9_backup.ko gspca_ov534.ko
+  494  ls
+  495  ll
+  496  lsmod
+  497  ls
+  498  lsmod
+  499  man modprobe
+  500  modprobe -r gspca_ov534 gspca_main 
+  501  sudo modprobe -r gspca_ov534 gspca_main 
+  502  lsmod
+  503  modprobe gspca_ov534
+  504  sudo modprobe gspca_ov534
+  505  lsmod | grep ov
+  506  sudo alsamixer 
+  507  sudo modprobe -r gspca_ov534 gspca_main 
+  508  sudo modprobe -r gspca_ov534_9 gspca_main 
+  509  ls
+  510  rm gspca_ov534.ko
+  511  sudo rm gspca_ov534.ko
+  512  mv gspca_ov534_9.ko
+  513  mv gspca_ov534_9_backup.ko gspca_ov534_9.ko
+  514  sudo mv gspca_ov534_9_backup.ko gspca_ov534_9.ko
+  515  sudo mv gspca_ov534_backup.ko gspca_ov534.ko
+  516  arecord -l
+  517  pocketsphinx_continuous 
+  518  pocketsphinx_continuous -adcdev hw:1,0
+  519  pocketsphinx_continuous -adcdev hw:1,0 -inmic yes
+  520  dmesg
+  521  sudo dmesg -c
+  522  dmesg
+  523  pocketsphinx_continuous -adcdev hw:1,0 -inmic yes
+  524  dmesg
+  525  pocketsphinx_continuous -adcdev hwplug:1,0 -inmic yes
+  526  pocketsphinx_continuous -adcdev hw:0,0 -inmic yes
+  527  pocketsphinx_continuous -adcdev hw:0,1 -inmic yes
+  528  arecord -l
+  529  pocketsphinx_continuous -adcdev default -inmic yes
+  530  pocketsphinx_continuous -adcdev sysdefault -inmic yes
+  531  pocketsphinx_continuous -inmic yes
+  532  arecord hello.wav
+  533  cd ~
+  534  arecord hello.wav
+  535  ll
+  536  aplay hello.wav 
+  537  arecord ll.wav
+  538  aplay ll.wav
+  539  dmesg
+  540  arecord ll.wav
+  541  aplay ll.wav
+  542  pocketsphinx_continuous -inmic yes
+  543  man pocketsphinx_continuous 
+  544  pocketsphinx_continuous -inmic yes -remove-noise
+  545  man pocketsphinx_continuous 
+  546  pocketsphinx_continuous -inmic yes -remove_noise
+  547  man pocketsphinx_continuous 
+  548  pocketsphinx_continuous -inmic yes -remove_noise yes
+  549  pocketsphinx_continuous -inmic yes
+  550  ll
+  551  pocketsphinx_continuous -inmic yes
+  552  ll
+  553  alsamixer 
+  554  arecord -l
+  555  alsamixer 
+  556  vim /etc/ld.so.conf
+  557  cd /etc/
+  558  ll
+  559  cd ld.so.conf.d/
+  560  ll
+  561  echo $PKG_CONFIG_PATH
+  562  cd 
+  563  ll
+  564  vim .bashrc
+  565  vim .profile 
+  566  vim .bashrc
+  567  source .bashrc 
+  568  pkg-config --cflags pocketsphinx
+  569  pkg-config --cflags sphinxbase 
+  570  pkg-config --cflags pocketsphinx
+  571  arecord -l
+  572  arecord -D hw:0,0 -d 5 close_the_window.wav
+  573  arecord
+  574  arecord -f cd -D hw:0,0 -d 5 close_the_window.wav
+  575  rm close_the_window.wav 
+  576  arecord -f cd -D hw:0,0 -d 5 close_the_window.wav
+  577  aplay -l
+  578  aplay -f cd -D hw:0,0 close_the_window.wav 
+  579  alsamixer 
+  580  aplay -f cd -D hw:0,0 close_the_window.wav 
+  581  alsamixer 
+  582  aplay -f cd -D hw:0,0 close_the_window.wav 
+  583  alsamixer 
+  584  aplay -f cd -D hw:0,0 close_the_window.wav 
+  585  alsamixer 
+  586  aplay -f cd -D hw:0,0 close_the_window.wav 
+  587  alsamixer 
+  588  aplay -f cd -D hw:0,0 close_the_window.wav 
+  589  df -h
+  590  apt list eclipse
+  591  ll
+  592  l
+  593  tar -xvzf eclipse-cpp-neon-1a-linux-gtk-x86_64.tar.gz 
+  594  ll
+  595  rm -rf eclipse-cpp-neon-1a-linux-gtk-x86_64.tar.gz 
+  596  ll
+  597  cd ex
+  598  cd eclipse/
+  599  ll
+  600  sudo apt-get install java
+  601  sudo apt-get update
+  602  apt list java
+  603  apt search java | grep java
+  604  apt list jvm
+  605  l
+  606  cd ../
+  607  ll
+  608  rm -rf eclipse
+  609  ll
+  610  tar -xvzf eclipse-inst-linux64.tar.gz 
+  611  ll
+  612  cd eclipse-installer/
+  613  ll
+  614  l
+  615  ./eclipse-inst 
+  616  ll
+  617  cd ../
+  618  l
+  619  rm -rf eclipse-inst*
+  620  ll
+  621  su
+  622  ll
+  623  rpm -Uvh jre-8u111-linux-x64.rpm 
+  624  sudo apt install rpm
+  625  man rpm
+  626  rpm -ivh jre-8u111-linux-x64.rpm 
+  627  sudo rpm -ivh jre-8u111-linux-x64.rpm 
+  628  basename
+  629  which basename
+  630  which cat
+  631  which cp
+  632  lll
+  633  ll
+  634  cd downloads/
+  635  ll
+  636  cd ..
+  637  ll
+  638  l
+  639  rm -rf Desktop/
+  640  ll
+  641  rm -rf public/
+  642  ll
+  643  l
+  644  rm -rf downloads/
+  645  ll
+  646  l
+  647  rm ll.wav 
+  648  rm test.wav hello.wav 
+  649  ll
+  650  l
+  651  tar -xvf sublime_text_3_build_3126_x64.tar.bz2 
+  652  ll
+  653  rm -rf sublime_text_3_build_3126_x64.tar.bz2 
+  654  l
+  655  cd projets5/
+  656  ll
+  657  rm -rf tts_module/
+  658  which git
+  659  git clone https://github.com/uestclx/tts_module.git
+  660  l
+  661  cd tts_module/
+  662  ll
+  663  git pull
+  664  cat README.md 
+  665  ll
+  666  cd ../
+  667  ll
+  668  cd pocketsphinx/pocketsphinx-5prealpha/
+  669  ll
+  670  cd test/data/
+  671  ll
+  672  aplay goforward.raw 
+  673  aplay
+  674  aplay -f S16_LE goforward.raw 
+  675  aplay -f S16_LE -r 16000 goforward.raw 
+  676  aplay -f U16_LE -r 16000 goforward.raw 
+  677  aplay -f S16_BE -r 16000 goforward.raw 
+  678  aplay -f S16_LE -r 16000 goforward.raw 
+  679  aplay -f S16_LE -r 32000 goforward.raw 
+  680  aplay -f S16_LE -r 8000 goforward.raw 
+  681  aplay -f S16_LE -r 18000 goforward.raw 
+  682  aplay -f S16_LE -r 20000 goforward.raw 
+  683  aplay -f S16_LE -r 16000 goforward.raw 
+  684  arecord -l
+  685  arecord -D hw:0,0 -f S16_LE -r 16000 close_the_window_S16_LE.raw
+  686  arecord -D hw:0,0 -f S16_LE -r 16000 -c 1 close_the_window_S16_LE.raw
+  687  arecord -D hw:0,0 -f S16_LE -r 16000 -c 2 close_the_window_S16_LE.raw
+  688  l
+  689  aplay -f S16_LE -r 16000 close_the_window_S16_LE.raw 
+  690  arecord -D hw:0,0 -f S16_LE -r 16000 -c 1 close_the_window_S16_LE.raw
+  691  arecord -D hw:0,0 -f S16_LE -r 16000 -c 2 close_the_window_S16_LE.raw
+  692  aplay -f S16_LE -r 16000 close_the_window_S16_LE.raw 
+  693  arecord
+  694  arecord -D hw:0,0 -f S16_LE -r 16000 -c 2 --disable-resample close_the_window_S16_LE.raw
+  695  aplay -f S16_LE -r 16000 close_the_window_S16_LE.raw 
+  696  lsusb -v
+  697  lsusb -v | less
+  698  arecord -l
+  699  ll
+  700  cd projets5/
+  701  ll
+  702  cd tts_module/
+  703  ll
+  704  git st
+  705  git config --global alias.co checkout
+  706  git config --global alias.st status
+  707  git st
+  708  git pull
+  709  git ingo
+  710  git info
+  711  ll
+  712  touch hello_world.c
+  713  make
+  714  touch makefile
+  715  pkg-config --variable=modeldir pocketsphinx
+  716  man make
+  717  ll
+  718  cd ../
+  719  ll
+  720  cd ../
+  721  ll
+  722  aplay close_the_window.wav 
+  723  cd projets5/
+  724  ll
+  725  cd pocketsphinx/
+  726  ll
+  727  cd pocketsphinx-5prealpha/
+  728  ll
+  729  cd test/
+  730  ll
+  731  cd data/
+  732  ll
+  733  cp goforward.raw ../../../../tts_module/
+  734  cd ../../../../te
+  735  cd ../../../../tts_module/
+  736  ll
+  737  make
+  738  gcc -o hello_ps hello_ps.c     -DMODELDIR=\"`pkg-config --variable=modeldir pocketsphinx`\"     `pkg-config --cflags --libs pocketsphinx sphinxbase`
+  739  gcc -o hello_ps hello_world.c     -DMODELDIR=\"`pkg-config --variable=modeldir pocketsphinx`\"     `pkg-config --cflags --libs pocketsphinx sphinxbase`
+  740  l
+  741  ll
+  742  ./hello_ps 
+  743  ll
+  744  rm hello_ps 
+  745  ll
+  746  make
+  747  l
+  748  make
+  749  ll
+  750  ./hello_world 
+  751  make clean
+  752  ll
+  753  make
+  754  ll
+  755  ./hello_world 
+  756  make clean
+  757  ll
+  758  make
+  759  man gcc
+  760  git st
+  761  make clean
+  762  ll
+  763  git st
+  764  git add -all
+  765  git add --all
+  766  git st
+  767  git commit -m ""
+  768  git commit -m "1)"
+  769  git st
+  770  git log
+  771  git commit --amend
+  772  git st
+  773  git log
+  774  git push
+  775  git pull
+  776  git st
+  777  git log
+  778  l
+  779  cd projets5/
+  780  ll
+  781  cd tts_module/
+  782  ll
+  783  cd ../../
+  784  ll
+  785  aplay close_the_window.wav 
+  786  cp close_the_window.wav projets5/tts_module/
+  787  cd projets5/tts_module/
+  788  ll
+  789  vim hello_world.c 
+  790  make
+  791  ll
+  792  ./hello_world 
+  793  ll
+  794  aplay goforward.raw 
+  795  aplay 
+  796  aplay -f U16_LE -r 16000 goforward.raw 
+  797  aplay -f S16_LE -r 16000 goforward.raw 
+  798  cd ../../
+  799  ll
+  800  aplay close_the_window_16000.raw 
+  801  ll
+  802  aplay close_the_window.aiff 
+  803  aplay -f S16_LE -r 16000 close_the_window.aiff 
+  804  cd projets5/tts_module/
+  805  ll
+  806  make clean
+  807  l
+  808  cp ../../close_the_window.aiff .
+  809  l
+  810  vim hello_world.c 
+  811  make
+  812  ./hello_world 
+  813  ll
+  814  cd ../
+  815  ll
+  816  cd pocketsphinx/pocketsphinx-5prealpha/test/data/
+  817  ll
+  818  aplay something.raw 
+  819  aplay -f S16_LE -r 16000 something.raw 
+  820  aplay -f S16_LE -r 16000 numbers.raw 
+  821  aplay -f S16_LE -r 16000 something.raw 
+  822  cp something.raw ../../../../tts_module/
+  823  cd -
+  824  ll
+  825  cd tts_module/
+  826  ls
+  827  make clean
+  828  ll
+  829  vim hello_world.c 
+  830  make
+  831  ./hello_world 
+  832  man arecord
+  833  ll
+  834  vim README.md 
+  835  git st
+  836  l
+  837  ll
+  838  rm close_the_window.wav 
+  839  ll
+  840  make clean
+  841  ll
+  842  git st
+  843  rm test_hw.raw 
+  844  git st
+  845  git diff
+  846  git st
+  847  git add --all
+  848  git st
+  849  git commit -m "generate S16_LE@16K audio file, and recognized successfully"
+  850  git push
+  851  vim README.md 
+  852  git st
+  853  git add README.md 
+  854  git commit -m "update readme.md"
+  855  git push
+  856  cd ../../
+  857  ll
+  858  cd projets5/
+  859  ll
+  860  cd pocketsphinx/pocketsphinx-5prealpha/
+  861  ll
+  862  grep -RHn pocketsphinx_continuous
+  863  find ./ continuous.c
+  864  find ./ -name continuous.c
+  865  cd ~
+  866  sudo apt-get install oracle-java
+  867  echo $PATH
+  868  cd /usr/local
+  869  ll
+  870  cd bin/
+  871  ll
+  872  cd ../../
+  873  ll
+  874  cd ~
+  875  ll
+  876  l
+  877  mkdir java
+  878  cd java/
+  879  cd ../
+  880  rm -r java
+  881  cd /usr/local
+  882  ll
+  883  cd ../
+  884  ll
+  885  cd locale/
+  886  ll
+  887  cd ~
+  888  ll
+  889  l
+  890  mkdir java
+  891  cd java/
+  892  cp ../jre-8u111-linux-x64.tar.gz .
+  893  ll
+  894  tar zxvf jre-8u111-linux-x64.tar.gz 
+  895  ll
+  896  rm jre-8u111-linux-x64.tar.gz 
+  897  ll
+  898  cd ../
+  899  ll
+  900  rm jre-8u111-linux-x64.tar.gz 
+  901  mkdir eclipse
+  902  mv eclipse-cpp-neon-1a-linux-gtk-x86_64.tar.gz eclipse/
+  903  l
+  904  ll
+  905  rm close_the_window_*
+  906  ll
+  907  rm close_the_window.aiff 
+  908  ll
+  909  cd eclipse/
+  910  ll
+  911  tar zxvf eclipse-cpp-neon-1a-linux-gtk-x86_64.tar.gz 
+  912  ll
+  913  cd eclipse/
+  914  ll
+  915  vim eclipse.ini 
+  916  l
+  917  ll
+  918  man arecord
+  919  arecord -l
+  920  arecord -r 16000 -f S16_LE -c 1 -t raw close_the_window_S16_LE_16000.raw
+  921  l
+  922  aplay close_the_window
+  923  aplay close_the_window_S16_LE_16000.raw 
+  924  aplay -f S16_LE -r 16000 close_the_window_S16_LE_16000.raw 
+  925  cp close_the_window_S16_LE_16000.raw projets5/tts_module/
+  926  cd projets5/tts_module/
+  927  ll
+  928  rm close_the_window.aiff 
+  929  ll
+  930  mv close_the_window_S16_LE_16000.raw close_the_window_16000.raw
+  931  make clean
+  932  ll
+  933  vim hello_world.c 
+  934  make
+  935  ./hello_world 
+  936  arecord -r 16000 -f S16_LE -c 1 -D hw:0,0 -t raw test_hw.raw
+  937  arecord -r 16000 -f S16_LE -c 1 -D hw:0,1 -t raw test_hw.raw
+  938  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t raw test_hw.raw
+  939  aplay -f S16_LE -r 16000 test_hw.raw 
+  940  pocketsphinx_continuous 
+  941  cd ~/java/jre1.8.0_111/bin/
+  942  ll
+  943  pwd
+  944  cd /etc/
+  945  ls acpi/../
+  946  apt search --installed
+  947  apt list installed
+  948  man apt
+  949  apt list --installed
+  950  apt list --installed | grep audio
+  951  ll
+  952  mv EclipsePreferences.zip eclipse/
+  953  cd eclipse/
+  954  ll
+  955  man tar
+  956  unzip EclipsePreferences.zip 
+  957  ll
+  958  rm EclipsePreferences.zip 
+  959  cd ../
+  960  ll
+  961  l
+  962  mv EclipsePreferences-20170103T134910Z.zip eclipse/
+  963  l
+  964  cd eclipse/
+  965  ll
+  966  unzip EclipsePreferences-20170103T134910Z.zip 
+  967  ll
+  968  rm EclipsePreferences-20170103T134910Z.zip 
+  969  ll
+  970  cd EclipsePreferences/
+  971  ll
+  972  pocketsphinx_continuous -inmic yes
+  973  cd ../../
+  974  cd projets5/pocketsphinx/sphinxbase-5prealpha/src/libsphinxad/
+  975  ll
+  976  l
+  977  mv g2p-seq2seq-cmudict.tar.gz projets5/
+  978  ll
+  979  cd projets5/
+  980  ll
+  981  tar -xvzf g2p-seq2seq-cmudict.tar.gz 
+  982  ll
+  983  rm g2p-seq2seq-cmudict.tar.gz 
+  984  ll
+  985  cd g2p-seq2seq-cmudict/
+  986  ll
+  987  pocketsphinx_continuous -inmic yes
+  988  pocketsphinx_continuous -keyphrase "hello world" -inmic yes
+  989  pocketsphinx_continuous -keyphrase "hello world" -inmic yes -time yes
+  990  pocketsphinx_continuous -keyphrase "hello world" -kws_threshold 1e-30  -inmic yes -time yes
+  991  pocketsphinx_continuous --infile close_the_window.wav 
+  992  pocketsphinx_continuous -infile close_the_window.wav 
+  993  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav test_wav.wav
+  994  ll
+  995  pocketsphinx_continuous -infile test_wav.wav 
+  996  arecord -r cd -f S16_LE -c 1 -D plughw:0,0 -t wav test_wav.wav
+  997  arecord -f cd -c 1 -D plughw:0,0 -t wav test_wav.wav
+  998  pocketsphinx_continuous -infile test_wav.wav 
+  999  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav test_wav.wav
+ 1000  pocketsphinx_continuous -infile test_wav.wav 
+ 1001  mv test_wav.wav open_the_door_S16_LE_16000.wav
+ 1002  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav test_wav.wav
+ 1003  pocketsphinx_continuous -infile test_wav.wav 
+ 1004  mv test_wav.wav close_the_window_S16_LE_16000.wav
+ 1005  ll
+ 1006  mv close_the_window_S16_LE_16000.wav projets5/tts_module/
+ 1007  mv open_the_door_S16_LE_16000.wav projets5/tts_module/
+ 1008  ll
+ 1009  pocketsphinx_continuous -inmic yes
+ 1010  pocketsphinx_continuous -inmic yes -keyphrase "hello"
+ 1011  ll
+ 1012  cd projets5/
+ 1013  ll
+ 1014  cd pocketsphinx/
+ 1015  ll
+ 1016  cd pocketsphinx-5prealpha/
+ 1017  ll
+ 1018  cd model/
+ 1019  ls
+ 1020  ll
+ 1021  cd en-us/
+ 1022  ll
+ 1023  cd en-us/
+ 1024  ll
+ 1025  cd ../
+ 1026  ll
+ 1027  vim cmudict-en-us.dict 
+ 1028  pocketsphinx_continuous -inmic yes
+ 1029  sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.9.0-cp27-none-linux_x86_64.whl
+ 1030  sudo apt install pip
+ 1031  sudo apt-get install pip
+ 1032  pipe
+ 1033  python
+ 1034  sudo apt install python-pip
+ 1035  sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.9.0-cp27-none-linux_x86_64.whl
+ 1036  sudo python setup.py install
+ 1037  cd ~
+ 1038  ll
+ 1039  cd projets5/
+ 1040  ll
+ 1041  git clone https://github.com/cmusphinx/g2p-seq2seq.git
+ 1042  ll
+ 1043  cd g2p-seq2seq/
+ 1044  l
+ 1045  ll
+ 1046  sudo python setup.py 
+ 1047  sudo python setup.py install
+ 1048  python setup.py test
+ 1049  sudo python setup.py test
+ 1050  cd ../
+ 1051  g2p-seq2seq --interactive --model g2p-seq2seq-cmudict
+ 1052  ll
+ 1053  cd el
+ 1054  cd eclipse/
+ 1055  ll
+ 1056  cd eclipse/
+ 1057  ll
+ 1058  vim eclipse.ini 
+ 1059  ll
+ 1060  mkdir projets5/tts_module/language_model
+ 1061  cd projets5/tts_module/language_model/
+ 1062  ll
+ 1063  mv ~/TAR7554.tgz ./
+ 1064  ll
+ 1065  tar xvzf TAR7554.tgz 
+ 1066  ll
+ 1067  sphinx_lm_convert -i 7554.lm -o 7554.lm.bin
+ 1068  ll
+ 1069  pocketsphinx_continuous -inmic yes -lm 7554.lm -dict 7554.dic 
+ 1070  pocketsphinx_continuous -inmic yes -lm 7554.lm
+ 1071  pocketsphinx_continuous -inmic yes -dict 7554.dic 
+ 1072  g2p-seq2seq --interactive --model .
+ 1073  ll
+ 1074  g2p-seq2seq --interactive --model 7554.dic 
+ 1075  ll
+ 1076  vim 7554.dic 
+ 1077  g2p-seq2seq --interactive --model 7554.dic 
+ 1078  LL
+ 1079  ll
+ 1080  vim 7554.lm
+ 1081  vim 7554.vocab 
+ 1082  cd -
+ 1083  ll
+ 1084  cd projets5/g2p-seq2seq-cmudict/
+ 1085  ll
+ 1086  vim model.params 
+ 1087  vim vocab.grapheme 
+ 1088  vim vocab.phoneme 
+ 1089  g2p-seq2seq --interactive --model .
+ 1090  ll
+ 1091  cd ../../
+ 1092  ll
+ 1093  cd -
+ 1094  cd ../
+ 1095  ll
+ 1096  cd tts_module/
+ 1097  ll
+ 1098  mkdir  train
+ 1099  cd train/
+ 1100  g2p-seq2seq --train ../language_model/7554.dic --model ./
+ 1101  ll
+ 1102  vim model
+ 1103  vim model.params 
+ 1104  vim vocab.phoneme 
+ 1105  g2p-seq2seq --interactive --model .
+ 1106  ll
+ 1107  pocketsphinx_continuous -inmic yes -dict ../language_model/7554.dic
+ 1108  pocketsphinx_continuous -inmic yes -dict ../language_model/7554.di -lm ../../pocketsphinx/pocketsphinx-5prealpha/model/en-us/en-us.lm.bin 
+ 1109  pocketsphinx_continuous -inmic yes -dict ../language_model/7554.dic -lm ../../pocketsphinx/pocketsphinx-5prealpha/model/en-us/en-us.lm.bin 
+ 1110  pocketsphinx_continuous -inmic yes -lm ../../pocketsphinx/pocketsphinx-5prealpha/model/en-us/en-us.lm.bin 
+ 1111  ll
+ 1112  cd ../
+ 1113  ll
+ 1114  rm -rf train
+ 1115  ll
+ 1116  cd language_model/
+ 1117  pocketsphinx_continuous -inmic yes -lm 7554.lm.bin -dict 7554.dic 
+ 1118  ll
+ 1119  cd ../
+ 1120  mv language_model 7554_model
+ 1121  mv ~/cmusphinx-en-us-8khz-5.2.tar.gz ./
+ 1122  ll
+ 1123  tar zvxf cmusphinx-en-us-8khz-5.2.tar.gz 
+ 1124  ll
+ 1125  rm cmusphinx-en-us-8khz-5.2.tar.gz 
+ 1126  ll
+ 1127  cd cmusphinx-en-us-8khz-5.2/
+ 1128  ll
+ 1129  vim README 
+ 1130  ll
+ 1131  ls -h
+ 1132  ll -h
+ 1133  vim README 
+ 1134  cd projets5/pocketsphinx/pocketsphinx-5prealpha/model/
+ 1135  ll
+ 1136  cd en-us/
+ 1137  ll
+ 1138  cd en-us/
+ 1139  ll
+ 1140  cd ../
+ 1141  ll
+ 1142  cd ../
+ 1143  ll
+ 1144  cd ../
+ 1145  ll
+ 1146  g2p-seq2seq --interactive --model ./
+ 1147  ll
+ 1148  g2p-seq2seq --interactive --model model
+ 1149  cd moe
+ 1150  cd model/
+ 1151  ll
+ 1152  cd ../../../
+ 1153  ll
+ 1154  cd g2p-seq2seq-cmudict/
+ 1155  ll
+ 1156  cd ../
+ 1157  ll
+ 1158  cd pocketsphinx/pocketsphinx-5prealpha/m
+ 1159  cd pocketsphinx/pocketsphinx-5prealpha/model/
+ 1160  ll
+ 1161  cd en-us/
+ 1162  ll
+ 1163  cd en-us/
+ 1164  ll
+ 1165  g2p-seq2seq --interactive --model .
+ 1166  cd ../../../
+ 1167  ll
+ 1168  cd ../
+ 1169  ll
+ 1170  cd ../
+ 1171  ll
+ 1172  cd g2p-seq2seq-cmudict/
+ 1173  ll
+ 1174  cat model.params 
+ 1175  cd projets5/tts_module/
+ 1176  git st
+ 1177  ll
+ 1178  rm .project .cproject 
+ 1179  rm -rf .settings/
+ 1180  git st
+ 1181  git add --all
+ 1182  ll
+ 1183  git st
+ 1184  git reset HEAD
+ 1185  git st
+ 1186  git add 7554_model close_the_window_S16_LE_16000.wav corpus_file.txt open_the_door_S16_LE_16000.wav 
+ 1187  git st
+ 1188  git commit -m "add 7554 model based on corpus_file.txt generated using online tool"
+ 1189  git st
+ 1190  git push
+ 1191  git pull
+ 1192  git push
+ 1193  git st
+ 1194  git pull
+ 1195  ll
+ 1196  mkdir ad_acous_model
+ 1197  cd 7554_model/
+ 1198  ll
+ 1199  vim 7554.dic 
+ 1200  cd ../../
+ 1201  ll
+ 1202  cd g2p-seq2seq-cmudict/
+ 1203  git st
+ 1204  ll
+ 1205  g2p-seq2seq --model .
+ 1206  g2p-seq2seq --interactive --model .
+ 1207  ll
+ 1208  cd projets5/tts_module/7554_model/
+ 1209  ll
+ 1210  pocketsphinx_continuous -inmic yes -dic 7554.dic -model 7554.lm.bin 
+ 1211  pocketsphinx_continuous -inmic yes -dict 7554.dic -lm 7554.lm.bin 
+ 1212  pocketsphinx_continuous -inmic yes -dict /usr/local/share/pocketsphinx/model/en-us/cmudict-en-us.dict -lm 7554.lm.bin 
+ 1213  pocketsphinx_continuous -inmic yes -dict /usr/local/share/pocketsphinx/model/en-us/cmudict-en-us.dict -lm /usr/local/share/pocketsphinx/model/en-us/en-us.lm.bin 
+ 1214  ll
+ 1215  git st
+ 1216  cd ../
+ 1217  git st
+ 1218  ll
+ 1219  vim .project 
+ 1220  git st
+ 1221  cd cu
+ 1222  cd cmusphinx-en-us-8khz-5.2/
+ 1223  l
+ 1224  ll
+ 1225  cd ../
+ 1226  ll
+ 1227  cd ad_acous_model/
+ 1228  ll
+ 1229  cp ../corpus_file.txt ./
+ 1230  ll
+ 1231  cd ../
+ 1232  ll
+ 1233  cd cmusphinx-en-us-8khz-5.2/
+ 1234  ll
+ 1235  cd ../
+ 1236  cd cmusphinx-en-us-8khz-5.2/
+ 1237  ll
+ 1238  history | grep continuous
+ 1239  cd /usr/local
+ 1240  ll
+ 1241  cd share/
+ 1242  ll
+ 1243  cd pocketsphinx/
+ 1244  ll
+ 1245  cd model/
+ 1246  ll
+ 1247  cd en-us/
+ 1248  ll
+ 1249  cd en-us/
+ 1250  ll
+ 1251  cd ../
+ 1252  ll
+ 1253  cd en-us/
+ 1254  ll
+ 1255  cd ~
+ 1256  ll
+ 1257  mv cmusphinx-en-us-ptm-5.2.tar.gz projets5/tts_module/
+ 1258  cd projets5/tts_module/
+ 1259  ll
+ 1260  tar -xzvf cmusphinx-en-us-ptm-5.2.tar.gz 
+ 1261  ll
+ 1262  rm cmusphinx-en-us-ptm-5.2.tar.gz 
+ 1263  ll
+ 1264  git st
+ 1265  git add --all
+ 1266  git st
+ 1267  git commit -m "begin to do acoustic model adaptation"
+ 1268  git st
+ 1269  git push
+ 1270  ll
+ 1271  cd cmusphinx-en-us-ptm-5.2/
+ 1272  ll
+ 1273  eixt
+ 1274  cd /usr/local
+ 1275  ll
+ 1276  cd share/
+ 1277  ll
+ 1278  cd ../
+ 1279  ll
+ 1280  cd lib/
+ 1281  l
+ 1282  which sphinx_fe 
+ 1283  cd /usr/local/bin/
+ 1284  ll
+ 1285  cd ~/projets5/
+ 1286  ll
+ 1287  cd tts_module/
+ 1288  ll
+ 1289  cd cmusphinx-en-us-ptm-5.2/
+ 1290  ll
+ 1291  cat feat.params 
+ 1292  cat README 
+ 1293  ll
+ 1294  cat feat.params 
+ 1295  cd ../
+ 1296  ll
+ 1297  cd cmusphinx-en-us-ptm-5.2/\
+ 1298  vim mixture_weights 
+ 1299  ll
+ 1300  cd ../
+ 1301  l
+ 1302  cd ../
+ 1303  ll
+ 1304  cd pocketsphinx/
+ 1305  ll
+ 1306  cd sphinxbase-5prealpha/
+ 1307  ll
+ 1308  cd ../
+ 1309  ll
+ 1310  cd pocketsphinx-5prealpha/
+ 1311  ll
+ 1312  cd ../
+ 1313  cd ../tts_module/
+ 1314  l
+ 1315  cd cmusphinx-en-us-ptm-5.2/
+ 1316  ll
+ 1317  vim feat.params 
+ 1318  cd ../
+ 1319  l
+ 1320  cd ad_acous_model/
+ 1321  ll
+ 1322  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0001.wav
+ 1323  aplay arctic_0001.wav 
+ 1324  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0001.wav
+ 1325  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0002.wav
+ 1326  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0003.wav
+ 1327  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0004.wav
+ 1328  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0005.wav
+ 1329  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0006.wav
+ 1330  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0007.wav
+ 1331  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0008.wav
+ 1332  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0009.wav
+ 1333  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0010.wav
+ 1334  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0011.wav
+ 1335  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0012.wav
+ 1336  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0013.wav
+ 1337  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0014.wav
+ 1338  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0015.wav
+ 1339  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0016.wav
+ 1340  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0017.wav
+ 1341  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0018.wav
+ 1342  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0019.wav
+ 1343  arecord -r 16000 -f S16_LE -c 1 -D plughw:0,0 -t wav arctic_0020.wav
+ 1344  ll
+ 1345  for i in *.wav; do play $i; done
+ 1346  for i in *.wav; do aplay $i; done
+ 1347  cd ../
+ 1348  ll
+ 1349  cd ../
+ 1350  ll
+ 1351  cd ../
+ 1352  ll
+ 1353  mv sphinxtrain-5prealpha.tar.gz projets5/
+ 1354  ll
+ 1355  cd projets5/
+ 1356  ll
+ 1357  tar -xvzf sphinxtrain-5prealpha.tar.gz 
+ 1358  ll
+ 1359  mv sphinxtrain-5prealpha.tar.gz ../
+ 1360  l
+ 1361  ll
+ 1362  cd sphinxtrain-5prealpha/
+ 1363  cd ../
+ 1364  ll
+ 1365  mv sphinxtrain-5prealpha pocketsphinx -f
+ 1366  ll
+ 1367  cd pocketsphinx/
+ 1368  ll
+ 1369  cd sphinxtrain-5prealpha/
+ 1370  ll
+ 1371  configure
+ 1372  ll
+ 1373  ./configure 
+ 1374  make
+ 1375  make install
+ 1376  sudo make install
+ 1377  ll
+ 1378  sphinxtrain 
+ 1379  which sphinxtrain 
+ 1380  cd /usr/local
+ 1381  ll
+ 1382  cd libexec/
+ 1383  ll
+ 1384  cd sphinxtrain/
+ 1385  ll
+ 1386  cd ../../
+ 1387  ll
+ 1388  cd ~
+ 1389  man cp
+ 1390  ll
+ 1391  cd projets5/
+ 1392  ll
+ 1393  cd tts_module/
+ 1394  ll
+ 1395  cp -a cmusphinx-en-us-ptm-5.2 ad_acous_model/
+ 1396  ll
+ 1397  cd ad_acous_model/
+ 1398  ll
+ 1399  cp -a /usr/local/share/pocketsphinx/model/en-us/cmudict-en-us.dict .
+ 1400  cp -a /usr/local/share/pocketsphinx/model/en-us/en-us.lm.bin .
+ 1401  ll
+ 1402  vim cmusphinx-en-us-ptm-5.2/feat.params 
+ 1403  cat cmusphinx-en-us-ptm-5.2/feat.params 
+ 1404  sphinx_fe -argfile cmusphinx-en-us-ptm-5.2/feat.params -samprate 16000 -c arctic20.fileids -di . -do . -ei wav -eo mfc -mswav yes
+ 1405  ll
+ 1406  ls cmusphinx-en-us-ptm-5.2/
+ 1407  vim cmusphinx-en-us-ptm-5.2/mdef 
+ 1408  pocketsphinx_mdef_convert -text cmusphinx-en-us-ptm-5.2/mdef cmusphinx-en-us-ptm-5.2/mdef.txt
+ 1409  cd cmusphinx-en-us-ptm-5.2/
+ 1410  ll
+ 1411  vim mdef.txt 
+ 1412  exit
+ 1413  ll
+ 1414  cd projets5/
+ 1415  ll
+ 1416  l
+ 1417  ll
+ 1418  cd tts_module/
+ 1419  ll
+ 1420  cd ad_acous_model/
+ 1421  ll
+ 1422  cp /usr/local/libexec/sphinxtrain/bw .
+ 1423  cp /usr/local/libexec/sphinxtrain/map_adapt .
+ 1424  cp /usr/local/libexec/sphinxtrain/mk_s2sendump .
+ 1425  ll
+ 1426  cat cmusphinx-en-us-ptm-5.2/feat.params 
+ 1427  ./bw -hmmdir cmusphinx-en-us-ptm-5.2 -moddeffn cmusphinx-en-us-ptm-5.2/mdef.txt -ts2cbfn .ptm. -feat 1s_c_d_dd -svspec 0-12/13-25/26-38 -cmn current -agc none -dectfn cmudict-en-us.dict -ctlfn arctic20.fileids -lsnfn arctic20.transcription -accumdir .
+ 1428  ./bw -hmmdir cmusphinx-en-us-ptm-5.2 -moddeffn cmusphinx-en-us-ptm-5.2/mdef.txt -ts2cbfn .ptm. -feat 1s_c_d_dd -svspec 0-12/13-25/26-38 -cmn current -agc none -dictfn cmudict-en-us.dict -ctlfn arctic20.fileids -lsnfn arctic20.transcription -accumdir .
+ 1429  ll
+ 1430  cp -a cmusphinx-en-us-ptm-5.2 en-us-apdat
+ 1431  ll
+ 1432  ./map_adapt -moddeffn cmusphinx-en-us-ptm-5.2/mdef.txt -ts2cbfn .ptm. -meanfn cmusphinx-en-us-ptm-5.2/means -varfn cmusphinx-en-us-ptm-5.2/variances -mixwfn cmusphinx-en-us-ptm-5.2/mixture_weights -tmatfn cmusphinx-en-us-ptm-5.2/transition_matrices -accumdir . -mapmeanfn en-us-apdat/means -mapvarfn en-us-apdat/variances -mapmixwfn en-us-apdat/mixture_weights -maptmatfn en-us-apdat/transition_matrices 
+ 1433  ll
+ 1434  vim tmat_counts 
+ 1435  ./mk_s2sendump -pocketsphinx yes -moddeffn en-us-apdat/mdef.txt -mixwfn en-us-apdat/mixture_weights -sendumpfn en-us-apdat/sendump 
+ 1436  pocketsphinx_continuous -hmm cmusphinx-en-us-ptm-5.2 -inmic yes
+ 1437  pocketsphinx_continuous -hmm en-us-apdat -inmic yes
+ 1438  cd ../
+ 1439  ll
+ 1440  pocketsphinx_continuous -inmic yes -lm 7554_model/7554.lm.bin -dict 7554_model/7554.dic 
+ 1441  pocketsphinx_continuous -inmic yes -lm 7554_model/7554.lm.bin -dict 7554_model/7554.dic -hmm ad_acous_model/en-us-apdat
+ 1442  pocketsphinx_continuous -inmic yes -hmm ad_acous_model/en-us-apdat
+ 1443  ll
+ 1444  cd ad_acous_model/
+ 1445  pocketsphinx_continuous -hmm cmusphinx-en-us-ptm-5.2 -infile arctic_0019.wav 
+ 1446  pocketsphinx_continuous -hmm cmusphinx-en-us-ptm-5.2 -infile arctic_0001.wav 
+ 1447  pocketsphinx_continuous -hmm cmusphinx-en-us-ptm-5.2 -infile arctic_0002.wav 
+ 1448  pocketsphinx_continuous -hmm cmusphinx-en-us-ptm-5.2 -infile arctic_0003.wav 
+ 1449  pocketsphinx_continuous -hmm en-us-apdat -infile arctic_0002.wav 
+ 1450  pocketsphinx_continuous -hmm en-us-apdat -infile arctic_0003.wav 
+ 1451  ll
+ 1452  rm -rf en-us-apdat/
+ 1453  cp -a cmusphinx-en-us-ptm-5.2 en-us-adapt
+ 1454  mv cmusphinx-en-us-ptm-5.2 en-us
+ 1455  ./map_adapt -moddeffn en-us/mdef.txt -ts2cbfn .ptm. -meanfn en-us/means -varfn en-us/variances -mixwfn en-us/mixture_weights -tmatfn en-us/transition_matrices -accumdir . -mapmeanfn en-us-adapt/means -mapvarfn en-us-adapt/variances -mapmixwfn en-us-adapt/mixture_weights -maptmatfn en-us-adapt/transition_matrices 
+ 1456  ./mk_s2sendump -pocketsphinx yes -moddeffn en-us-adapt/mdef.txt -mixwfn en-us-adapt/mixture_weights -sendumpfn en-us-adapt/sendump
+ 1457  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0002.wav
+ 1458  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0003.wav
+ 1459  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0004.wav
+ 1460  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0005.wav
+ 1461  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0006.wav
+ 1462  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0007.wav
+ 1463  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0008.wav
+ 1464  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0009.wav
+ 1465  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0010.wav
+ 1466  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0011.wav
+ 1467  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0012.wav
+ 1468  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0013.wav
+ 1469  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0014.wav
+ 1470  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0015.wav
+ 1471  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0016.wav
+ 1472  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0017.wav
+ 1473  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0018.wav
+ 1474  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0019.wav
+ 1475  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0020.wav
+ 1476  pocketsphinx_continuous -inmic yes -hmm en-us -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0020.wav
+ 1477  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -inmic yes
+ 1478  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict
+ 1479  cd ../
+ 1480  ll
+ 1481  git st
+ 1482  git add --all
+ 1483  history > train_acoustic_model_command.txt
