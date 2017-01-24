@@ -125,7 +125,7 @@ recognize_from_microphone()
     if (ps_start_utt(ps) < 0)
         E_FATAL("Failed to start utterance\n");
     utt_started = FALSE;
-    E_INFO("Ready....\n");
+    printf("Ready....\n");
 
     for (;;) {
         if ((k = ad_read(ad, adbuf, 2048)) < 0)
@@ -134,34 +134,37 @@ recognize_from_microphone()
         in_speech = ps_get_in_speech(ps);
         if (in_speech && !utt_started) {
             utt_started = TRUE;
-            E_INFO("Listening...\n");
+            printf("Listening...\n");
         }
         if (!in_speech && utt_started) {
             /* speech -> silence transition, time to start new utterance  */
             ps_end_utt(ps);
             hyp = ps_get_hyp(ps, NULL );
             if (hyp != NULL) {
-                printf("%s\n", hyp);
-                printf("keyphrase = %s\n", cmd_ln_str_r(config, "-keyphrase"));
+                //printf("%s\n", hyp);
+                //printf("keyphrase = %s\n", cmd_ln_str_r(config, "-keyphrase"));
                 fflush(stdout);
 
                 if (!strcmp(ps_get_search(ps), "keyword")) {
                     if (!strcmp(hyp, cmd_ln_str_r(config, "-keyphrase"))) {
-                        printf("OK, tres bien. MATCH! Speak the command=====>\n");
+                	printf("%s\n", hyp);
+                        printf("OK, tres bien. KEYWORD MATCH! Speak the command:\n");
+                        fflush(stdout);
                         ps_set_search(ps, "lm");
                     }
                 } else if (!strcmp(ps_get_search(ps), "lm")) {
                     ps_set_search(ps, "keyword");
-                    printf("=========>this is where we do the processing with hyp\n");
+                    printf("[command]===============>%s\n", hyp);
+                    printf("========================>Processing...\n");
                 }
             }
 
             if (ps_start_utt(ps) < 0)
                 E_FATAL("Failed to start utterance\n");
             utt_started = FALSE;
-            E_INFO("Ready....\n");
+            printf("Ready....\n");
         }
-        sleep_msec(100);
+        sleep_msec(10);
     }
     ad_close(ad);
 }
