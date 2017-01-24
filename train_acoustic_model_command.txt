@@ -972,29 +972,4 @@
  1455  ./map_adapt -moddeffn en-us/mdef.txt -ts2cbfn .ptm. -meanfn en-us/means -varfn en-us/variances -mixwfn en-us/mixture_weights -tmatfn en-us/transition_matrices -accumdir . -mapmeanfn en-us-adapt/means -mapvarfn en-us-adapt/variances -mapmixwfn en-us-adapt/mixture_weights -maptmatfn en-us-adapt/transition_matrices 
  1456  ./mk_s2sendump -pocketsphinx yes -moddeffn en-us-adapt/mdef.txt -mixwfn en-us-adapt/mixture_weights -sendumpfn en-us-adapt/sendump
  1457  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0002.wav
- 1458  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0003.wav
- 1459  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0004.wav
- 1460  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0005.wav
- 1461  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0006.wav
- 1462  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0007.wav
- 1463  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0008.wav
- 1464  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0009.wav
- 1465  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0010.wav
- 1466  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0011.wav
- 1467  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0012.wav
- 1468  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0013.wav
- 1469  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0014.wav
- 1470  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0015.wav
- 1471  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0016.wav
- 1472  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0017.wav
- 1473  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0018.wav
- 1474  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0019.wav
- 1475  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0020.wav
- 1476  pocketsphinx_continuous -inmic yes -hmm en-us -lm en-us.lm.bin -dict cmudict-en-us.dict -infile arctic_0020.wav
- 1477  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict -inmic yes
- 1478  pocketsphinx_continuous -inmic yes -hmm en-us-adapt -lm en-us.lm.bin -dict cmudict-en-us.dict
- 1479  cd ../
- 1480  ll
- 1481  git st
- 1482  git add --all
- 1483  history > train_acoustic_model_command.txt
+

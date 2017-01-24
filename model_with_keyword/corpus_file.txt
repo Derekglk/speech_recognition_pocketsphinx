@@ -1,0 +1,67 @@
+december
+microphone
+computer
+robot
+obama
+jarvis
+snowman
+police
+
+open the window
+close the window
+
+turn-on the light
+turn-on the living-room light
+turn-on the light in the living-room
+turn-on the kitchen light
+turn-on the light in the kitchen
+turn-on the bathroom light
+turn-on the light in the bathroom
+
+turn-off the light
+turn-off the living-room light
+turn-off the light in the living-room
+turn-off the kitchen light
+turn-off the light in the kitchen
+turn-off the bathroom light
+turn-off the light in the bathroom
+
+turn-up the light
+turn-up the living-room light
+turn-up the light in the living-room
+turn-up the kitchen light
+turn-up the light in the kitchen
+turn-up the bathroom light
+turn-up the light in the bathroom
+
+turn-down the light
+turn-down the living-room light
+turn-down the light in the living-room
+turn-down the kitchen light
+turn-down the light in the kitchen
+turn-down the bathroom light
+turn-down the light in the bathroom
+
+switch-on the light
+switch-on the living-room light
+switch-on the light in the living-room
+switch-on the kitchen light
+switch-on the light in the kitchen
+switch-on the bathroom light
+switch-on the light in the bathroom
+
+switch-off the light
+switch-off the living-room light
+switch-off the light in the living-room
+switch-off the kitchen light
+switch-off the light in the kitchen
+switch-off the bathroom light
+switch-off the light in the bathroom
+
+lock the door
+unlock the door
+
+turn-up the radiator
+turn-down the radiator
+turn-on the radiator
+turn-off the radiator
