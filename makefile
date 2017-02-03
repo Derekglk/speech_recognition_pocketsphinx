@@ -3,7 +3,7 @@ CFLAGS=-c -Wall
 CFLAGS+=`pkg-config --cflags pocketsphinx sphinxbase`
 CFLAGS+=-DMODELDIR=\"`pkg-config --variable=modeldir pocketsphinx`\"
 LDFLAGS=`pkg-config --libs pocketsphinx sphinxbase`
-SOURCES=hello_world.c
+SOURCES=hello_world.c json_parser.c
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=hello_world
 

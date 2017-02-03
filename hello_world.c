@@ -6,6 +6,7 @@
 #include <sphinxbase/err.h>
 #include <sphinxbase/ad.h>
 
+#include "whatever.h"
 #if 0
 int
 main(int argc, char *argv[])
@@ -156,6 +157,11 @@ recognize_from_microphone()
                     ps_set_search(ps, "keyword");
                     printf("[command]===============>%s\n", hyp);
                     printf("========================>Processing...\n");
+                    if (command_proc(hyp) != 0) {
+                	printf("Oops! Please retry the command!\n");
+                    } else {
+                	printf("Success!\n");
+                    }
                 }
             }
 
