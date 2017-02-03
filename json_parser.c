@@ -153,23 +153,32 @@ static int proc_light(result_t *result) {
       printf("Please specify light location.\n");
       return -1;
   }
+  /* TODO: Here we need to use protocol to send the message */
+  printf("Sent command to the light.\n");
   return 0;
 }
 
 static int proc_window(result_t *result) {
+  /* TODO: Here we need to use protocol to send the message */
+  printf("Sent command to the window.\n");
   return 0;
 }
 
 static int proc_door(result_t *result) {
+  /* TODO: Here we need to use protocol to send the message */
+  printf("Sent command to the door.\n");
   return 0;
 }
 
 static int proc_radiator(result_t *result) {
+  /* TODO: Here we need to use protocol to send the message */
+  printf("Sent command to the radiator.\n");
   return 0;
 }
 
 static int processing(result_t *result) {
   int ret = 0;
+
   switch (result->det_object) {
     case LIGHT:
       ret = proc_light(result);
@@ -184,6 +193,7 @@ static int processing(result_t *result) {
       ret = proc_radiator(result);
       break;
     default:
+      ret = -1;
       printf("OBJECT[%d] not recognized!\n", result->det_object);
   }
   return ret;

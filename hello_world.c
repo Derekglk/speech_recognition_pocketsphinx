@@ -158,7 +158,7 @@ recognize_from_microphone()
                     printf("[command]===============>%s\n", hyp);
                     printf("========================>Processing...\n");
                     if (command_proc(hyp) != 0) {
-                	printf("Oops! Please retry the command!\n");
+                	printf("Oops! Processing failed...Please retry the command!\n");
                     } else {
                 	printf("Success!\n");
                     }
