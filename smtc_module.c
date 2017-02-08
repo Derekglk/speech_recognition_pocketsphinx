@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "whatever.h"
+#include "smtc_module.h"
 
 #ifndef TEST
 //#define TEST
@@ -94,13 +94,15 @@ static void detect_object(char *command, result_t *result) {
   for (i = 0; i < (sizeof(object)/sizeof(object[0])); i++) {
       if (strstr(command, object[i].name) != NULL) {
 	  result->det_object = object[i].enum_value;
-	  printf("object [%s] detected!\n", object[i].name);
+	  LOG_YELLOW("===>object ");
+	  LOG_BLUE("[");
+	  LOG_BLUE(object[i].name);
+	  LOG_BLUE("]");
+	  LOG_YELLOW("detected!\n");
 	  break;
       }
   }
-  if (result->det_object == OBJECT_INV) {
-      printf("XXXXXXXXXXXXXXXX[NO OBJECT]XXXXXXXXXXXXXXXX\n");
-  }
+
   return;
 }
 
@@ -110,13 +112,15 @@ static void detect_location(char *command, result_t *result) {
   for (i = 0; i < (sizeof(location)/sizeof(location[0])); i++) {
       if (strstr(command, location[i].name) != NULL) {
 	  result->det_location = location[i].enum_value;
-	  printf("location [%s] detected!\n", location[i].name);
+	  LOG_YELLOW("===>location ");
+	  LOG_BLUE("[");
+	  LOG_BLUE(location[i].name);
+	  LOG_BLUE("]");
+	  LOG_YELLOW("detected!\n");
 	  break;
       }
   }
-  if (result->det_location == LOCATION_INV) {
-      printf("XXXXXXXXXXXXXXXX[NO LOCATION]XXXXXXXXXXXXXXXX\n");
-  }
+
   return;
 }
 
@@ -126,23 +130,25 @@ static void detect_action(char *command, result_t *result) {
   for (i = 0; i < (sizeof(action)/sizeof(action[0])); i++) {
       if (strstr(command, action[i].name) != NULL) {
 	  result->det_action = action[i].enum_value;
-	  printf("action [%s] detected!\n", action[i].name);
+	  LOG_YELLOW("===>action ");
+	  LOG_BLUE("[");
+	  LOG_BLUE(action[i].name);
+	  LOG_BLUE("]");
+	  LOG_YELLOW("detected!\n");
 	  break;
       }
   }
-  if (result->det_action == ACTION_INV) {
-      printf("XXXXXXXXXXXXXXXX[NO ACTION]XXXXXXXXXXXXXXXX\n");
-  }
+
   return;
 }
 
 static int check_result(result_t *result) {
   if (result->det_object == OBJECT_INV) {
-      printf("UNKONW object!\n");
+      LOG_RED("===>[error]UNKONW object!\n");
       return -1;
   }
   if (result->det_action == ACTION_INV) {
-      printf("UNKNOWN action!\n");
+      LOG_RED("===>[error]UNKNOWN action!\n");
       return -1;
   }
   return 0;
@@ -150,29 +156,29 @@ static int check_result(result_t *result) {
 
 static int proc_light(result_t *result) {
   if (result->det_location == LOCATION_INV) {
-      printf("Please specify light location.\n");
+      LOG_RED("[info]Please specify light location.\n");
       return -1;
   }
   /* TODO: Here we need to use protocol to send the message */
-  printf("Sent command to the light.\n");
+  LOG_GREEN("===>Sent command to the light.\n");
   return 0;
 }
 
 static int proc_window(result_t *result) {
   /* TODO: Here we need to use protocol to send the message */
-  printf("Sent command to the window.\n");
+  LOG_GREEN("===>Sent command to the window.\n");
   return 0;
 }
 
 static int proc_door(result_t *result) {
   /* TODO: Here we need to use protocol to send the message */
-  printf("Sent command to the door.\n");
+  LOG_GREEN("===>Sent command to the door.\n");
   return 0;
 }
 
 static int proc_radiator(result_t *result) {
   /* TODO: Here we need to use protocol to send the message */
-  printf("Sent command to the radiator.\n");
+  LOG_GREEN("===>Sent command to the radiator.\n");
   return 0;
 }
 
@@ -194,7 +200,7 @@ static int processing(result_t *result) {
       break;
     default:
       ret = -1;
-      printf("OBJECT[%d] not recognized!\n", result->det_object);
+      LOG_RED("===>[error]object not recognized!\n");
   }
   return ret;
 }
@@ -249,7 +255,11 @@ int command_proc(const char *command){
   int i;
   result_t result;
 
-  printf("receive command: [%s]\n", command);
+  LOG_YELLOW("*******PROCESSING MODULE*******\n");
+  LOG_YELLOW("===>receive command: ");
+  LOG_BLUE("[");
+  LOG_BLUE(command);
+  LOG_BLUE("]\n");
   init_result(&result);
 
   detect_object(command, &result);
@@ -257,11 +267,11 @@ int command_proc(const char *command){
   detect_action(command, &result);
 
   if (check_result(&result) != 0) {
-      printf("check result failed!\n");
+      LOG_RED("[error]check result failed!\n");
       return -1;
   }
   if (processing(&result) != 0) {
-      printf("processing result failed!\n");
+      LOG_RED("[error]processing result failed!\n");
       return -1;
   }
   return 0;

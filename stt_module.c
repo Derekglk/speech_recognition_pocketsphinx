@@ -6,7 +6,7 @@
 #include <sphinxbase/err.h>
 #include <sphinxbase/ad.h>
 
-#include "whatever.h"
+#include "smtc_module.h"
 #if 0
 int
 main(int argc, char *argv[])
@@ -111,6 +111,7 @@ recognize_from_microphone()
     int16 adbuf[2048];
     uint8 utt_started, in_speech;
     int32 k;
+    int ret;
     char const *hyp;
 
     if ((ad = ad_open_dev(cmd_ln_str_r(config, "-adcdev"),
@@ -149,19 +150,25 @@ recognize_from_microphone()
                 if (!strcmp(ps_get_search(ps), "keyword")) {
                     if (!strcmp(hyp, cmd_ln_str_r(config, "-keyphrase"))) {
                 	printf("%s\n", hyp);
-                        printf("OK, tres bien. KEYWORD MATCH! Speak the command:\n");
+                        LOG_GREEN("*******************KEYWORD MATCH*******************\n");
                         fflush(stdout);
                         ps_set_search(ps, "lm");
                     }
                 } else if (!strcmp(ps_get_search(ps), "lm")) {
                     ps_set_search(ps, "keyword");
-                    printf("[command]===============>%s\n", hyp);
-                    printf("========================>Processing...\n");
-                    if (command_proc(hyp) != 0) {
-                	printf("Oops! Processing failed...Please retry the command!\n");
+                    LOG_GREEN("============>");
+                    LOG_BLUE("[");
+                    LOG_BLUE(hyp);
+                    LOG_BLUE("]\n");
+                    LOG_GREEN("============>Processing...\n");
+                    ret = command_proc(hyp);
+                    LOG_YELLOW("*******************************\n");
+                    if (ret != 0) {
+                	LOG_RED("Oops! Processing Failed...Please retry the command!\n");
                     } else {
-                	printf("Success!\n");
+                	LOG_GREEN("============>Success!\n");
                     }
+                    LOG_GREEN("***************************************************\n");
                 }
             }
 
