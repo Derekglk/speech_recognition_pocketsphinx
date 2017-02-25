@@ -5,6 +5,11 @@
 #include <sys/select.h>
 #include <sphinxbase/err.h>
 #include <sphinxbase/ad.h>
+#include <unistd.h>
+#include <errno.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #include "smtc_module.h"
 #if 0
@@ -63,6 +68,8 @@ main(int argc, char *argv[])
 
 static ps_decoder_t *ps;
 static cmd_ln_t *config;
+static pid_t pid;
+static int run;
 
 static const arg_t cont_args_def[] = {
     POCKETSPHINX_OPTIONS,
@@ -90,6 +97,13 @@ static const arg_t cont_args_def[] = {
     CMDLN_EMPTY_OPTION
 };
 
+void sig_handler(int signo)
+{
+  if (signo == SIGINT) {
+      printf("received SIGINT\n");
+      run = 0;
+  }
+}
 
 static void
 sleep_msec(int32 ms)
@@ -129,7 +143,7 @@ recognize_from_microphone()
     utt_started = FALSE;
     printf("Ready....\n");
 
-    for (;;) {
+    while (run) {
         if ((k = ad_read(ad, adbuf, 2048)) < 0)
             E_FATAL("Failed to read audio\n");
         ps_process_raw(ps, adbuf, k, FALSE, FALSE);
@@ -187,6 +201,9 @@ int
 main(int argc, char *argv[])
 {
     char const *cfg;
+    int pipefd[2];
+
+    signal(SIGINT, sig_handler);
 
     config = cmd_ln_parse_r(NULL, cont_args_def, argc, argv, TRUE);
 
@@ -220,11 +237,37 @@ main(int argc, char *argv[])
     E_INFO("%s COMPILED ON: %s, AT: %s\n\n", argv[0], __DATE__, __TIME__);
 
     if (cmd_ln_boolean_r(config, "-inmic")) {
-        recognize_from_microphone();
+        if (pipe(pipefd) == -1) {
+            perror("pipe");
+            exit(EXIT_FAILURE);
+        }
+
+	pid = fork();
+	if (pid < 0) {
+	    //error
+	    printf("create xaal protocol module failed\n");
+	    perror("fork");
+	} else if (pid > 0) {
+	    //parent
+	    run = 1;
+	    close(pipefd[0]);
+	    recognize_from_microphone();
+	} else {
+	    //child
+	    close(pipefd[1]);
+//	    execlp("./dummyLamp", "dummyLamp", "-a", "224.0.29.200", "-p", "1234", NULL);
+	    dummy_commander(pipefd[0], "224.0.29.200", "1234");
+	    printf("XXXXXXXXXXXXXchild process returns\n");
+//	    _exit(EXIT_FAILURE);
+	}
+
+    } else {
+	printf("stt module only takes microphone input.\n");
     }
 
     ps_free(ps);
     cmd_ln_free_r(config);
+    wait(NULL);
 
     return 0;
 }
