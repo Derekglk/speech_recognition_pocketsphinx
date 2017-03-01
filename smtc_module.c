@@ -3,48 +3,6 @@
 #include <stdlib.h>
 #include "smtc_module.h"
 
-#ifndef TEST
-//#define TEST
-#endif
-
-typedef enum {
-  LIGHT,
-  WINDOW,
-  DOOR,
-  RADIATOR,
-  OBJECT_NUM,
-  OBJECT_INV = 255
-} object_enum;
-
-typedef enum {
-  OPEN,
-  CLOSE,
-  TURN_ON,
-  TURN_OFF,
-  TURN_UP,
-  TURN_DOWN,
-  SWITCH_ON,
-  SWITCH_OFF,
-  LOCK,
-  UNLOCK,
-  ACTION_NUM,
-  ACTION_INV = 255,
-} action_enum;
-
-typedef enum {
-  LIVING_ROOM,
-  KITCHEN,
-  BATHROOM,
-  LOCATION_NUM,
-  LOCATION_INV = 255,
-} location_enum;
-
-typedef struct result_s {
-  object_enum det_object;
-  location_enum det_location;
-  action_enum det_action;
-} result_t;
-
 typedef struct str2enum_s {
   const char *name;
   int enum_value;
@@ -85,12 +43,6 @@ static void init_result(result_t *result) {
 static void detect_object(char *command, result_t *result) {
   int i;
 
-#if defined TEST
-  printf("object size = %lu\n", sizeof(object));
-  for (i = 0; i < (sizeof(object)/sizeof(object[0])); i++) {
-      printf("element[%d] = %s\n", i, object[i].name);
-  }
-#endif
   for (i = 0; i < (sizeof(object)/sizeof(object[0])); i++) {
       if (strstr(command, object[i].name) != NULL) {
 	  result->det_object = object[i].enum_value;
@@ -151,107 +103,27 @@ static int check_result(result_t *result) {
       LOG_RED("===>[error]UNKNOWN action!\n");
       return -1;
   }
-  return 0;
-}
-
-static int proc_light(result_t *result) {
-  if (result->det_location == LOCATION_INV) {
-      LOG_RED("[info]Please specify light location.\n");
+  if ((result->det_object == LIGHT) &&
+      (result->det_location == LOCATION_INV)) {
+      LOG_RED("===>[error]LIGHT doesn't have LOCATION info!\n");
       return -1;
   }
-  /* TODO: Here we need to use protocol to send the message */
-  LOG_GREEN("===>Sent command to the light.\n");
   return 0;
 }
 
-static int proc_window(result_t *result) {
-  /* TODO: Here we need to use protocol to send the message */
-  LOG_GREEN("===>Sent command to the window.\n");
-  return 0;
-}
-
-static int proc_door(result_t *result) {
-  /* TODO: Here we need to use protocol to send the message */
-  LOG_GREEN("===>Sent command to the door.\n");
-  return 0;
-}
-
-static int proc_radiator(result_t *result) {
-  /* TODO: Here we need to use protocol to send the message */
-  LOG_GREEN("===>Sent command to the radiator.\n");
-  return 0;
-}
-
-static int processing(result_t *result) {
+static int processing(int pipe_write, result_t *result) {
   int ret = 0;
 
-  switch (result->det_object) {
-    case LIGHT:
-      ret = proc_light(result);
-      break;
-    case WINDOW:
-      ret = proc_window(result);
-      break;
-    case DOOR:
-      ret = proc_door(result);
-      break;
-    case RADIATOR:
-      ret = proc_radiator(result);
-      break;
-    default:
+  if (write(pipe_write, result, sizeof(result_t)) < 0) {
+      perror("send semantic result");
       ret = -1;
-      LOG_RED("===>[error]object not recognized!\n");
   }
   return ret;
 }
 
 
-int command_proc(const char *command){
+int command_proc(int pipe_write, const char *command){
 
-#if defined TEST
-  char phrase_test[] = "TURN-ON THE LIVING-ROOM LIGHT";
-  char action_test[] = "TURN-ON";
-  char object_test[] = "window";
-  char location_test[] = "LIVING-ROOM";
-
-
-  if (strstr(phrase_test, action_test) != NULL) {
-      printf("phrase includes action!\n");
-  } else {
-      printf("phrase NOT includes action!\n");
-  }
-  if (strstr(phrase_test, object_test) != NULL) {
-      printf("phrase includes object!\n");
-  } else {
-      printf("phrase NOT includes object!\n");
-  }
-  if (strstr(phrase_test, location_test) != NULL) {
-      printf("phrase includes location!\n");
-  } else {
-      printf("phrase NOT includes location!\n");
-  }
-
-  char switch_content[] = "computer";
-  char phrase_addr[] = "computer";
-
-  switch (switch_content) {
-    case "computer":
-      printf("computer case\n");
-      break;
-    case "screen":
-      printf("screen case\n");
-      break;
-    case "window":
-      printf("window case\n");
-      break;
-    default:
-      printf("nobody's case\n");
-      break;
-  }
-
-  printf("switch_content = 0x%08ld\n", (long)switch_content);
-  printf("phrase_addr = 0x%08ld\n", (long)phrase_addr);
-#endif
   int i;
   result_t result;
 
@@ -260,6 +132,7 @@ int command_proc(const char *command){
   LOG_BLUE("[");
   LOG_BLUE(command);
   LOG_BLUE("]\n");
+
   init_result(&result);
 
   detect_object(command, &result);
@@ -270,7 +143,7 @@ int command_proc(const char *command){
       LOG_RED("[error]check result failed!\n");
       return -1;
   }
-  if (processing(&result) != 0) {
+  if (processing(pipe_write, &result) != 0) {
       LOG_RED("[error]processing result failed!\n");
       return -1;
   }

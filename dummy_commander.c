@@ -28,6 +28,8 @@
 
 #include <xaal.h>
 
+#include "smtc_module.h"
+
 
 
 /* Some global variables nedded for the sig handler */
@@ -49,7 +51,7 @@ typedef struct entry {
 #define ALIVE_PERIOD	60
 
 /* SIGALRM handler that sends alive messages */
-void alive_sender(int sig) {
+static void alive_sender(int sig) {
   if (!xAAL_notify_alive(&bus, &cli) )
     fprintf(xAAL_error_log, "Could not send spontaneous alive notification.\n");
   alarm(ALIVE_PERIOD);
@@ -58,7 +60,8 @@ void alive_sender(int sig) {
 
 /* Send a request to a set of lamps*/
 /* Return true if success */
-bool bulk_request(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli, lamps_t *lamps, const char *action) {
+static bool bulk_request(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli,
+			 lamps_t *lamps, const char *action) {
   lamp_t *np;
   char **targets;
   int i = 0, max = 10;
@@ -90,7 +93,7 @@ bool bulk_request(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli, lamps_t 
 
 /* Send isAlive request */
 /* Return true if success */
-bool request_isAlive(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli) {
+static bool request_isAlive(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli) {
   struct json_object *jbody, *jdevTypes;
 
   jdevTypes = json_object_new_array();
@@ -103,13 +106,22 @@ bool request_isAlive(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli) {
 }
 
 
-#define CLI_MENU	"\nMenu: (1) Select lamps  (2) Send on  (3) Send off  (4) Quit\nYour choice?  "
+
 
 /* Command Line Interface */
-void cli_menu(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli, lamps_t *lamps) {
-  int menu, choice, i;
-  lamp_t *np;
+static int command_hdlr(int pipe_read, const xAAL_businfo_t *bus,
+			 const xAAL_devinfo_t *cli, lamps_t *lamps) {
 
+  lamp_t *np;
+  result_t result;
+  int i;
+
+  if (read(pipe_read, &result, sizeof(result_t)) < 0) {
+      perror("read semantic result");
+      return -1;
+  }
+
+#if 1
   if ( scanf("%d", &menu) == 1 ) {
     switch (menu) {
     case 1:
@@ -162,15 +174,13 @@ void cli_menu(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli, lamps_t *lam
     scanf("%*s");
     printf("Sorry.\n");
   }
-  fflush(stdin);
-  printf(CLI_MENU);
-  fflush(stdout);
+#endif
 }
 
 
 
 /* manage received message */
-void manage_msg(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli, lamps_t *lamps) {
+static void manage_msg(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli, lamps_t *lamps) {
   struct json_object *jmsg, *jtargets;
   const char *version, *source, *msgType, *devType, *action,
 	     *cipher, *signature;
@@ -244,50 +254,17 @@ void manage_msg(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli, lamps_t *l
 
 
 /* main */
-int main(int argc, char **argv) {
-  int opt;
-  char *addr=NULL, *port=NULL;
+int dummy_commander(int pipe_read, char *addr, char *port) {
+
   uuid_t uuid;
   int hops = -1;
-  bool arg_error = false;
+
   struct sigaction act_alarm;
   fd_set rfds, rfds_;
   lamps_t lamps;
 
   uuid_clear(uuid);
 
-  /* Parse cmdline arguments */
-  while ((opt = getopt(argc, argv, "a:p:h:u:")) != -1) {
-    switch (opt) {
-      case 'a':
-	addr = optarg;
-	break;
-      case 'p':
-	port = optarg;
-	break;
-      case 'h':
-	hops = atoi(optarg);
-	break;
-      case 'u':
-	if ( uuid_parse(optarg, uuid) == -1 ) {
-	  fprintf(stderr, "Warning: invalid uuid '%s'\n", optarg);
-	  uuid_clear(uuid);
-	} else
-	  strcpy(cli.addr, optarg);
-	break;
-      default: /* '?' */
-	arg_error = true;
-    }
-  }
-  if (optind < argc) {
-    fprintf(stderr, "Unknown argument %s\n", argv[optind]);
-    arg_error = true;
-  }
-  if (addr==NULL || port==NULL || arg_error) {
-    fprintf(stderr, "Usage: %s -a <addr> -p <port> [-h <hops>] [-u <uuid>]\n",
-	    argv[0]);
-    exit(EXIT_FAILURE);
-  }
 
   /* Join the xAAL bus */
   xAAL_error_log = stderr;
@@ -332,11 +309,9 @@ int main(int argc, char **argv) {
   if ( !request_isAlive(&bus, &cli) )
     fprintf(xAAL_error_log, "Could not send isAlive request.\n");
 
-  printf(CLI_MENU);
-  fflush(stdout);
 
   FD_ZERO(&rfds);
-  FD_SET(STDIN_FILENO, &rfds);
+  FD_SET(pipe_read, &rfds);
   FD_SET(bus.sfd, &rfds);
 
   /* Main loop */
@@ -345,9 +320,9 @@ int main(int argc, char **argv) {
     if ( (select(bus.sfd+1, &rfds_, NULL, NULL, NULL) == -1) && (errno != EINTR) )
       fprintf(xAAL_error_log, "select(): %s\n", strerror(errno));
 
-    if (FD_ISSET(STDIN_FILENO, &rfds_)) {
+    if (FD_ISSET(pipe_read, &rfds_)) {
       /* User wake up */
-      cli_menu(&bus, &cli, &lamps);
+      command_hdlr(pipe_read, &bus, &cli, &lamps);
 
     } else if (FD_ISSET(bus.sfd, &rfds_)) {
       /* Recive a message */

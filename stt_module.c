@@ -66,10 +66,14 @@ main(int argc, char *argv[])
 }
 #endif
 
+#define BUS_ADDRESS "224.0.29.200"
+#define BUS_PORT "1234"
+
 static ps_decoder_t *ps;
 static cmd_ln_t *config;
 static pid_t pid;
 static int run;
+
 
 static const arg_t cont_args_def[] = {
     POCKETSPHINX_OPTIONS,
@@ -119,7 +123,7 @@ sleep_msec(int32 ms)
 
 
 static void
-recognize_from_microphone()
+recognize_from_microphone(int pipe_write)
 {
     ad_rec_t *ad;
     int16 adbuf[2048];
@@ -175,7 +179,7 @@ recognize_from_microphone()
                     LOG_BLUE(hyp);
                     LOG_BLUE("]\n");
                     LOG_GREEN("============>Processing...\n");
-                    ret = command_proc(hyp);
+                    ret = command_proc(pipe_write, hyp);
                     LOG_YELLOW("*******************************\n");
                     if (ret != 0) {
                 	LOG_RED("Oops! Processing Failed...Please retry the command!\n");
@@ -251,14 +255,12 @@ main(int argc, char *argv[])
 	    //parent
 	    run = 1;
 	    close(pipefd[0]);
-	    recognize_from_microphone();
+	    recognize_from_microphone(pipefd[0]);
 	} else {
 	    //child
 	    close(pipefd[1]);
-//	    execlp("./dummyLamp", "dummyLamp", "-a", "224.0.29.200", "-p", "1234", NULL);
-	    dummy_commander(pipefd[0], "224.0.29.200", "1234");
+	    dummy_commander(pipefd[0], BUS_ADDRESS, BUS_PORT);
 	    printf("XXXXXXXXXXXXXchild process returns\n");
-//	    _exit(EXIT_FAILURE);
 	}
 
     } else {
