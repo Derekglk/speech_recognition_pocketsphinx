@@ -104,7 +104,7 @@ static const arg_t cont_args_def[] = {
 void sig_handler(int signo)
 {
   if (signo == SIGINT) {
-      printf("received SIGINT\n");
+      printf("stt_module received SIGINT\n");
       run = 0;
   }
 }
@@ -254,7 +254,7 @@ main(int argc, char *argv[])
 	    run = 1;
 	    close(pipefd[0]);
 	    signal(SIGINT, sig_handler);
-	    recognize_from_microphone(pipefd[0]);
+	    recognize_from_microphone(pipefd[1]);
 	} else {
 	    //child
 	    close(pipefd[1]);

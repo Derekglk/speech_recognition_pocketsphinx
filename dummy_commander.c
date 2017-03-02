@@ -46,8 +46,6 @@ typedef struct entry {
   LIST_ENTRY(entry) entries;
 } lamp_t;
 
-
-
 #define ALIVE_PERIOD	60
 
 /* SIGALRM handler that sends alive messages */
@@ -265,7 +263,6 @@ int dummy_commander(int pipe_read, char *addr, char *port) {
   lamps_t lamps;
 
   uuid_clear(uuid);
-
 
   /* Join the xAAL bus */
   xAAL_error_log = stderr;
