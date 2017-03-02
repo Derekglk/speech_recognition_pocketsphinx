@@ -207,8 +207,6 @@ main(int argc, char *argv[])
     char const *cfg;
     int pipefd[2];
 
-    signal(SIGINT, sig_handler);
-
     config = cmd_ln_parse_r(NULL, cont_args_def, argc, argv, TRUE);
 
     /* Handle argument file as -argfile. */
@@ -255,6 +253,7 @@ main(int argc, char *argv[])
 	    //parent
 	    run = 1;
 	    close(pipefd[0]);
+	    signal(SIGINT, sig_handler);
 	    recognize_from_microphone(pipefd[0]);
 	} else {
 	    //child

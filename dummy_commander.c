@@ -112,16 +112,19 @@ static bool request_isAlive(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli
 static int command_hdlr(int pipe_read, const xAAL_businfo_t *bus,
 			 const xAAL_devinfo_t *cli, lamps_t *lamps) {
 
-  lamp_t *np;
+//  lamp_t *np;
   result_t result;
-  int i;
+//  int i;
 
   if (read(pipe_read, &result, sizeof(result_t)) < 0) {
       perror("read semantic result");
       return -1;
   }
 
-#if 1
+  printf("object = [%d], location = [%d], action = [%d]\n",
+	 result.det_object, result.det_location, result.det_action);
+  return 0;
+#if 0
   if ( scanf("%d", &menu) == 1 ) {
     switch (menu) {
     case 1:
@@ -176,8 +179,6 @@ static int command_hdlr(int pipe_read, const xAAL_businfo_t *bus,
   }
 #endif
 }
-
-
 
 /* manage received message */
 static void manage_msg(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli, lamps_t *lamps) {

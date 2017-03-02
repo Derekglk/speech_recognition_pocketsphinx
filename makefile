@@ -3,20 +3,21 @@ CFLAGS=-c -Wall
 CFLAGS+=`pkg-config --cflags pocketsphinx sphinxbase`
 CFLAGS+=-DMODELDIR=\"`pkg-config --variable=modeldir pocketsphinx`\"
 LDFLAGS=`pkg-config --libs pocketsphinx sphinxbase`
-SOURCES=stt_module.c smtc_module.c
+LDFLAGS+=-ljson-c -luuid -lxaal
+SOURCES=stt_module.c smtc_module.c dummy_commander.c
 OBJECTS=$(SOURCES:.c=.o)
-EXECUTABLE=demo
+EXECUTABLE=voice_commandor
 
 .PHONY: default
 default: all
 
-all: $(SOURCES) $(EXECUTABLE)
+all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
 
 .c.o:
-	echo $(CFLAGS)
+#	echo $(CFLAGS)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:

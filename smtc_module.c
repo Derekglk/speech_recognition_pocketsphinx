@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "smtc_module.h"
 
 typedef struct str2enum_s {
@@ -40,7 +41,7 @@ static void init_result(result_t *result) {
   result->det_object = OBJECT_INV;
 }
 
-static void detect_object(char *command, result_t *result) {
+static void detect_object(const char *command, result_t *result) {
   int i;
 
   for (i = 0; i < (sizeof(object)/sizeof(object[0])); i++) {
@@ -58,7 +59,7 @@ static void detect_object(char *command, result_t *result) {
   return;
 }
 
-static void detect_location(char *command, result_t *result) {
+static void detect_location(const char *command, result_t *result) {
   int i;
 
   for (i = 0; i < (sizeof(location)/sizeof(location[0])); i++) {
@@ -76,7 +77,7 @@ static void detect_location(char *command, result_t *result) {
   return;
 }
 
-static void detect_action(char *command, result_t *result) {
+static void detect_action(const char *command, result_t *result) {
   int i;
 
   for (i = 0; i < (sizeof(action)/sizeof(action[0])); i++) {
@@ -124,7 +125,6 @@ static int processing(int pipe_write, result_t *result) {
 
 int command_proc(int pipe_write, const char *command){
 
-  int i;
   result_t result;
 
   LOG_YELLOW("*******PROCESSING MODULE*******\n");
