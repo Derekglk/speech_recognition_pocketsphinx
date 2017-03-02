@@ -301,9 +301,11 @@ int dummy_commander(int pipe_read, char *addr, char *port) {
   sigaction(SIGALRM, &act_alarm, NULL);
   alarm(ALIVE_PERIOD);
 
+  /* notify alive is to tell the others that i'm alive */
   if ( !xAAL_notify_alive(&bus, &cli) )
     fprintf(xAAL_error_log, "Could not send initial alive notification.\n");
 
+  /* request isAlive is to ask who's alive on the bus */
   if ( !request_isAlive(&bus, &cli) )
     fprintf(xAAL_error_log, "Could not send isAlive request.\n");
 

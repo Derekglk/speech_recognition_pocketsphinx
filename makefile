@@ -11,14 +11,17 @@ EXECUTABLE=voice_commandor
 .PHONY: default
 default: all
 
-all: $(EXECUTABLE)
+all: $(EXECUTABLE) dummyLamp
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
+
+dummyLamp: dummyLamp.o
+	$(CC) dummyLamp.o -o $@ $(LDFLAGS)
 
 .c.o:
 #	echo $(CFLAGS)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -f *.o $(EXECUTABLE)
+	rm -f *.o $(EXECUTABLE) dummyLamp
