@@ -51,6 +51,21 @@ void json_parse_array( json_object *jobj, char *key) {
       json_parse(jvalue);
     }
   }
+  /* to be modified */
+  int i, len;
+  json_object record;
+  json_object jtargets;
+  len = json_object_array_length(jtargets);
+  printf("Array Length: %d\n",len);
+
+  for (i = 0; i < len; i++) {
+      record = json_object_array_get_idx(jtargets, i);
+      if (json_object_get_type(record) == json_type_object) {
+            target = json_object_get_string(jtarget);
+            if (strcmp(target, addr) == 0)
+              return true;
+      }
+  }
 }
 
 /*Parsing the json object*/
@@ -60,28 +75,28 @@ void json_parse(json_object * jobj) {
     printf("type: ",type);
     type = json_object_get_type(val);
     switch (type) {
-      case json_type_boolean: 
-      case json_type_double: 
-      case json_type_int: 
+      case json_type_boolean:
+      case json_type_double:
+      case json_type_int:
       case json_type_string: print_json_value(val);
-                           break; 
+                           break;
       case json_type_object: printf("json_type_objectn");
                            jobj = json_object_object_get(jobj, key);
-                           json_parse(jobj); 
+                           json_parse(jobj);
                            break;
       case json_type_array: printf("type: json_type_array, ");
                           json_parse_array(jobj, key);
                           break;
     }
   }
-} 
+}
 
 int main() {
   char * string = "{"sitename" : "joys of programming",
                      "categories" : [ "c" , ["c++" , "c" ], "java", "PHP" ],
-                     "author-details": { "admin": false, "name" : "Joys of Programming", "Number of Posts" : 10 } 
+                     "author-details": { "admin": false, "name" : "Joys of Programming", "Number of Posts" : 10 }
                      }";
   printf("JSON string: %sn", string);
-  json_object * jobj = json_tokener_parse(string);     
+  json_object * jobj = json_tokener_parse(string);
   json_parse(jobj);
 }
