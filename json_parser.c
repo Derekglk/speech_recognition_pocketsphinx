@@ -7,7 +7,7 @@
 
 
 #define MAX_CONFIG_SIZE (1024)
-#define CONFIG_FILE "json_output_array.txt"
+#define CONFIG_FILE "device_config.json"
 
 int json_parse_config(json_object *jobj) {
   int i, len;

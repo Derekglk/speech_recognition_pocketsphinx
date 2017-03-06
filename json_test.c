@@ -16,7 +16,7 @@ int main() {
   char addr1[37];
   char addr2[37];
   int fd;
-  char *fname = "json_output_array.txt";
+  char *fname = "device_config.json";
   
   uuid_clear(uuid1);
   uuid_clear(uuid2);

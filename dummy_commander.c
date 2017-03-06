@@ -35,7 +35,7 @@
 #include <fcntl.h>
 
 #define MAX_CONFIG_SIZE (1024)
-#define CONFIG_FILE "json_output_array.txt"
+#define CONFIG_FILE "device_config.json"
 
 typedef struct enum2xaal_s {
   int enum_value;
