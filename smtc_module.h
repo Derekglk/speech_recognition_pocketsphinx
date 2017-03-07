@@ -42,6 +42,7 @@ typedef enum {
   LIVING_ROOM,
   KITCHEN,
   BATHROOM,
+  ANYWHERE,
   LOCATION_NUM,
   LOCATION_INV = 255,
 } location_enum;

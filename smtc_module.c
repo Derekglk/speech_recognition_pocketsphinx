@@ -37,7 +37,7 @@ static str2enum_t action[] = {
 
 static void init_result(result_t *result) {
   result->det_action = ACTION_INV;
-  result->det_location = LOCATION_INV;
+  result->det_location = ANYWHERE;
   result->det_object = OBJECT_INV;
 }
 
@@ -104,11 +104,7 @@ static int check_result(result_t *result) {
       LOG_RED("===>[error]UNKNOWN action!\n");
       return -1;
   }
-  if ((result->det_object == LIGHT) &&
-      (result->det_location == LOCATION_INV)) {
-      LOG_RED("===>[error]LIGHT doesn't have LOCATION info!\n");
-      return -1;
-  }
+
   return 0;
 }
 

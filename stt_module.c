@@ -201,8 +201,7 @@ recognize_from_microphone(int pipe_write)
 }
 
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     char const *cfg;
     int pipefd[2];

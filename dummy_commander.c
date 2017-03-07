@@ -35,6 +35,7 @@
 #include <fcntl.h>
 
 #define MAX_CONFIG_SIZE (1024)
+#define MAX_DEVICE_NAME (32)
 #define CONFIG_FILE "device_config.json"
 
 typedef struct enum2xaal_s {
@@ -52,7 +53,8 @@ static enum2xaal_t object_xaal[] = {
 static enum2xaal_t location_xaal[] = {
     {LIVING_ROOM, "livingroom"},
     {KITCHEN, "kitchen"},
-    {BATHROOM, "bathroom"}
+    {BATHROOM, "bathroom"},
+    {ANYWHERE, "anywhere"}
 };
 
 static enum2xaal_t action_xaal[] = {
@@ -114,7 +116,7 @@ static int search_and_send_cmd(const xAAL_businfo_t *bus, const xAAL_devinfo_t *
   int ret = 0;
   int idx = 0, max = 10;
   char config[MAX_CONFIG_SIZE];
-  char *dev_name;
+  char dev_name[MAX_DEVICE_NAME];
   char **targets;
   const char *uuid_conf, *type_conf, *location_conf;
 
@@ -127,6 +129,7 @@ static int search_and_send_cmd(const xAAL_businfo_t *bus, const xAAL_devinfo_t *
 
 
   targets = (char **)malloc(max*sizeof(char *));
+  memset(targets, 0, max*sizeof(char *));
 
   fd = open(CONFIG_FILE, O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
   if (fd < 0) {
@@ -205,13 +208,20 @@ static int search_and_send_cmd(const xAAL_businfo_t *bus, const xAAL_devinfo_t *
       }
       if (ret != -1) {
 	  sprintf(dev_name, "%s%s", object, ".");
-	  if ((strncmp(type_conf, dev_name, strlen(dev_name)) == 0) &&
-	      (strncmp(location_conf, location, strlen(location)) == 0)) {
-	      targets[idx++] = (char *)uuid_conf;
+	  if (strncmp(type_conf, dev_name, strlen(dev_name)) == 0) {
+	      if ((strncmp(location, "anywhere", strlen("anywhere")) == 0) ||
+		  (strncmp(location_conf, location, strlen(location)) == 0)) {
+		  targets[idx++] = (char *)uuid_conf;
+		  printf("add uuid = %s into targets list\n", uuid_conf);
+	      }
 	  }
       }
   }
   targets[idx] = NULL;
+  if (targets[0] == NULL) {
+      printf("targets[0] is NULL\n");
+      ret = -1;
+  }
   if (ret != -1)
   	ret = xAAL_write_busv(bus, cli, "request", action, NULL, targets);
   free(targets);
@@ -323,18 +333,15 @@ static void manage_msg(const xAAL_businfo_t *bus, const xAAL_devinfo_t *cli, lam
       np->selected = false;
       LIST_INSERT_HEAD(lamps, np, entries);
     }
-
   }
   json_object_put(jmsg);
 }
 
-
-
 /* main */
 int dummy_commander(int pipe_read, char *addr, char *port) {
-
   uuid_t uuid;
   int hops = -1;
+  int max_fd;
 
   struct sigaction act_alarm;
   fd_set rfds, rfds_;
@@ -391,21 +398,20 @@ int dummy_commander(int pipe_read, char *addr, char *port) {
   FD_ZERO(&rfds);
   FD_SET(pipe_read, &rfds);
   FD_SET(bus.sfd, &rfds);
+  max_fd = (bus.sfd > pipe_read) ? bus.sfd : pipe_read;
 
   /* Main loop */
   for (;;) {
     rfds_ = rfds;
-    if ( (select(bus.sfd+1, &rfds_, NULL, NULL, NULL) == -1) && (errno != EINTR) )
+    if ( (select(max_fd + 1, &rfds_, NULL, NULL, NULL) == -1) && (errno != EINTR) )
       fprintf(xAAL_error_log, "select(): %s\n", strerror(errno));
 
     if (FD_ISSET(pipe_read, &rfds_)) {
       /* User wake up */
       command_hdlr(pipe_read, &bus, &cli);
-
     } else if (FD_ISSET(bus.sfd, &rfds_)) {
       /* Recive a message */
       manage_msg(&bus, &cli, &lamps);
-
     }
   }
 }
