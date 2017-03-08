@@ -60,7 +60,7 @@ void alive_sender(int sig) {
 /* main */
 int main(int argc, char **argv) {
   int opt;
-  char *addr=NULL, *port=NULL;
+  char *addr=NULL, *port=NULL, *dev_name = NULL;
   uuid_t uuid;
   int hops = -1;
   bool arg_error = false;
@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
   uuid_clear(uuid);
 
   /* Parse cmdline arguments */
-  while ((opt = getopt(argc, argv, "a:p:h:u:")) != -1) {
+  while ((opt = getopt(argc, argv, "a:p:h:u:n:")) != -1) {
     switch (opt) {
       case 'a':
 	addr = optarg;
@@ -94,6 +94,9 @@ int main(int argc, char **argv) {
 	} else
 	  strcpy(lamp.addr, optarg);
 	break;
+      case 'n':
+        dev_name = optarg;
+        break;
       default: /* '?' */
 	arg_error = true;
     }
@@ -131,16 +134,15 @@ int main(int argc, char **argv) {
   if ( !xAAL_notify_alive(&bus, &lamp) )
     fprintf(xAAL_error_log, "Could not send initial alive notification.\n");
 
-printf("childrens: %s\n", json_object_get_string(xAAL_vector2array(lamp.childrens)));
-
+//printf("childrens: %s\n", json_object_get_string(xAAL_vector2array(lamp.childrens)));
   /* Main loop */
   for (;;) {
 
     /* Show lamp */
     if (attribute_light)
-      printf(" (O) On \r");
+      printf("%s (O) On \r", dev_name);
     else
-      printf("  .  Off\r");
+      printf("%s  .  Off\r", dev_name);
     fflush(stdout);
 
     /* Recive a message */
@@ -192,7 +194,7 @@ printf("childrens: %s\n", json_object_get_string(xAAL_vector2array(lamp.children
     }
     json_object_put(jmsg);
 
-printf("childrens: %s\n", json_object_get_string(xAAL_vector2array(lamp.childrens)));
-
+//printf("childrens: %s\n", json_object_get_string(xAAL_vector2array(lamp.childrens)));
+//fflush(stdout);
   }
 }
