@@ -194,7 +194,5 @@ int main(int argc, char **argv) {
     }
     json_object_put(jmsg);
 
-//printf("childrens: %s\n", json_object_get_string(xAAL_vector2array(lamp.childrens)));
-//fflush(stdout);
   }
 }
