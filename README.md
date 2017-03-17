@@ -1,5 +1,5 @@
 # stt_module
-This project is an tts module based on PocketSphinx
+This project is an stt module based on PocketSphinx
 
 **For hello\_world program, pocketsphinx takes as input an audio file with following requirements**
 
