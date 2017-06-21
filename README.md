@@ -1,4 +1,4 @@
-# stt_module
+# Speech Recognition
 This project is an stt module based on PocketSphinx
 
 **For hello\_world program, pocketsphinx takes as input an audio file with following requirements**
